@@ -1,15 +1,54 @@
-version: '3.1'
 services:
-  stats-server:
+  stats-db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: ewm_stats_db
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: 12345
+    ports:
+      - "5432:5432"
+    networks:
+      - ewm-network
+
+  stats-service:
+    build:
+      context: ./ewm-stats-service/server
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://stats-db:5432/ewm_stats_db
+      SPRING_DATASOURCE_USERNAME: dbuser
+      SPRING_DATASOURCE_PASSWORD: 12345
     ports:
       - "9090:9090"
+    networks:
+      - ewm-network
+    depends_on:
+      - stats-db
 
-  stats-db:
-    image: postgres:14-alpine
-
-  ewm-service:
+  main-service:
+    build:
+      context: ./ewm-main-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://main-db:5432/ewm_db
+      SPRING_DATASOURCE_USERNAME: dbuser
+      SPRING_DATASOURCE_PASSWORD: 12345
     ports:
       - "8080:8080"
+    networks:
+      - ewm-network
+    depends_on:
+      - main-db
 
-  ewm-db:
-    image: postgres:14-alpine
+  main-db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: ewm_db
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: 12345
+    ports:
+      - "5433:5432"
+    networks:
+      - ewm-network
+
+networks:
+  ewm-network:
+    driver: bridge

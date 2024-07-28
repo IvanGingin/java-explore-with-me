@@ -18,7 +18,7 @@
 	<modules>
 		<module>ewm-main-service</module>
 		<module>ewm-stats-service</module>
-	</modules>
+    </modules>
 
 	<properties>
 		<java.version>11</java.version>
