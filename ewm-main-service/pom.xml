@@ -67,6 +67,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>ru.practicum.MainApplication</mainClass> <!-- Замените на ваше полное имя главного класса -->
+                </configuration>
             </plugin>
         </plugins>
     </build>
