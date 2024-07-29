@@ -9,6 +9,7 @@ import ru.practicum.explorewithme.dto.StatDto;
 import ru.practicum.explorewithme.dto.StatResponseDto;
 import ru.practicum.explorewithme.service.StatService;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class StatsController {
     private final StatService statService;
 
     @PostMapping("/hit")
-    public ResponseEntity<StatDto> postStat(@RequestBody @Validated StatDto statDto) {
+    public ResponseEntity<StatDto> postStat(@RequestBody @Valid StatDto statDto) {
         StatDto savedStat = statService.postStat(statDto);
         return ResponseEntity.status(201).body(savedStat);
     }
