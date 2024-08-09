@@ -220,6 +220,7 @@ public class EventServiceImpl implements EventService {
         return new EventRequestStatusUpdateResult(confirmedRequests, rejectedRequests);
     }
 
+
     private void validateEventDate(LocalDateTime eventDate) {
         if (eventDate != null && eventDate.isBefore(LocalDateTime.now().plusHours(2))) {
             throw new ConflictException("Дата события должна быть минимум через " + 2 + " часа");
