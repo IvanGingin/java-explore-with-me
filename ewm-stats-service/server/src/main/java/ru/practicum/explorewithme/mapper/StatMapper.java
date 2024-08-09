@@ -8,8 +8,9 @@ import ru.practicum.explorewithme.model.Stat;
 public class StatMapper {
 
     public Stat toStat(StatDto statDto) {
-        if (statDto == null)
+        if (statDto == null) {
             return null;
+        }
 
         return Stat.builder()
                 .ip(statDto.getIp())
@@ -20,8 +21,9 @@ public class StatMapper {
     }
 
     public StatDto toStatDto(Stat stat) {
-        if (stat == null)
+        if (stat == null) {
             return null;
+        }
 
         return StatDto.builder()
                 .timestamp(stat.getTimestamp())
