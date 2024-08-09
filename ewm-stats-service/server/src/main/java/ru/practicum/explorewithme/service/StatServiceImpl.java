@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.explorewithme.dto.StatDto;
 import ru.practicum.explorewithme.dto.StatResponseDto;
+import ru.practicum.explorewithme.repository.StatServiceRepository;
 import ru.practicum.explorewithme.mapper.StatMapper;
 import ru.practicum.explorewithme.model.Stat;
-import ru.practicum.explorewithme.repository.StatServiceRepository;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -27,11 +27,11 @@ public class StatServiceImpl implements StatService {
 
     @Override
     public StatDto postStat(StatDto statDto) {
-        log.debug("Received StatDto: {}", statDto);
+        log.debug("Получен StatDto: {}", statDto);
         Stat stat = StatMapper.toStat(statDto);
-        log.debug("Mapped Stat: {}", stat);
+        log.debug("Преобразован в Stat: {}", stat);
         Stat savedStat = statRepository.save(stat);
-        log.debug("Saved Stat: {}", savedStat);
+        log.debug("Сохранен Stat: {}", savedStat);
         return StatMapper.toStatDto(savedStat);
     }
 
@@ -39,8 +39,10 @@ public class StatServiceImpl implements StatService {
     @Transactional(readOnly = true)
     public List<StatResponseDto> getStat(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique) {
         if (start.isAfter(end)) {
-            throw new IllegalArgumentException("The start date cannot be later than the end date");
+            throw new IllegalArgumentException("Дата начала не может быть позже даты окончания");
         }
+
+        log.debug("Получение статистики с {} по {} для URI: {} с уникальностью: {}", start, end, uris, unique);
 
         List<Object[]> results;
         if (uris == null || uris.isEmpty()) {
@@ -57,10 +59,11 @@ public class StatServiceImpl implements StatService {
             }
         }
 
+        log.debug("Сырые результаты: {}", results);
+
         return results.stream()
                 .map(result -> new StatResponseDto((String) result[0], (String) result[1], (Long) result[2]))
                 .sorted(Comparator.comparingLong(StatResponseDto::getHits).reversed())
                 .collect(Collectors.toList());
     }
 }
-
