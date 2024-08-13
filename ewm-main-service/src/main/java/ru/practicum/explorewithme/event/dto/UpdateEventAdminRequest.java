@@ -17,20 +17,20 @@ import static ru.practicum.explorewithme.util.Constants.DATE_FORMAT;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UpdateEventAdminRequest {
     @Size(min = 20, max = 2000)
-    private String annotation;
-    private Long category;
+    String annotation;
+    Long category;
     @Size(min = 20, max = 7000)
-    private String description;
+    String description;
     @Future
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_FORMAT)
-    private LocalDateTime eventDate;
-    private LocationDto location;
-    private Boolean paid;
+    LocalDateTime eventDate;
+    LocationDto location;
+    Boolean paid;
     @PositiveOrZero
-    private Integer participantLimit;
-    private Boolean requestModeration;
-    private String stateAction;
+    Integer participantLimit;
+    Boolean requestModeration;
+    String stateAction;
     @Size(min = 3, max = 120)
-    private String title;
+    String title;
 }
 

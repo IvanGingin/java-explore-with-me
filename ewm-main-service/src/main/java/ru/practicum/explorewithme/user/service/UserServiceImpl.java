@@ -33,6 +33,8 @@ public class UserServiceImpl implements UserService {
         return UserMapper.toUserDto(savedUser);
     }
 
+    @Override
+    @Transactional(readOnly = true)
     public List<UserDto> getUsers(List<Long> ids, int from, int size) {
         if (ids != null && !ids.isEmpty()) {
             List<User> users = userRepository.findAllById(ids);
