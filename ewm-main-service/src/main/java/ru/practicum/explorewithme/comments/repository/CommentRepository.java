@@ -15,6 +15,7 @@ import java.util.Optional;
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     Optional<Comment> findByIdAndUserId(Long commentId, Long userId);
+
     @Query
     List<Comment> getAllByUserId(Long userId);
 

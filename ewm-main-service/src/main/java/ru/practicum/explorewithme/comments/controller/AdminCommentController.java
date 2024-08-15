@@ -47,6 +47,7 @@ public class AdminCommentController {
                              @PathVariable long commentId) {
         return commentService.updateCommentAdmin(commentId, updateCommentDto);
     }
+
     @DeleteMapping("/{commentId}")
     public void deleteCommentAdmin(@PathVariable long commentId) {
         commentService.deleteCommentAdmin(commentId);
