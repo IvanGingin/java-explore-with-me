@@ -23,7 +23,7 @@ public class Stat {
     private String app;
     @Column(name = "ip")
     private String ip;
-    @Column(name = "time_stamp")
+    @Column(name = "timestamp")
     private LocalDateTime timestamp;
     @Column(name = "uri")
     private String uri;

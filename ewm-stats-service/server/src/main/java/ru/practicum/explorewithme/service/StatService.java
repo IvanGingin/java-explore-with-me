@@ -11,5 +11,5 @@ public interface StatService {
 
     StatDto postStat(StatDto statDto);
 
-    List<StatResponseDto> getStat(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique);
+    List<StatResponseDto> getStat(LocalDateTime rangeStart, LocalDateTime end, List<String> uris, boolean unique);
 }
