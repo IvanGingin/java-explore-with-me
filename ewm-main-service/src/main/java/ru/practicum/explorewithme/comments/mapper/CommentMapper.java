@@ -1,6 +1,6 @@
 package ru.practicum.explorewithme.comments.mapper;
 
-import lombok.experimental.UtilityClass;
+import lombok.experimental.*;
 import ru.practicum.explorewithme.comments.dto.CommentDto;
 import ru.practicum.explorewithme.comments.dto.NewCommentDto;
 import ru.practicum.explorewithme.comments.model.Comment;
